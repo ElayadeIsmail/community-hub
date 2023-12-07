@@ -26,6 +26,13 @@ const LoginPage = () => {
 							action={action}
 							autoComplete='off'
 							className='space-y-4'>
+							{formState.formError && (
+								<span
+									className='text-center bg-destructive rounded py-2 inline-block w-full text-destructive-foreground'
+									role='alert'>
+									{formState.formError}
+								</span>
+							)}
 							<FromInput
 								inputProps={{
 									name: 'username',

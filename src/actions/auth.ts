@@ -1,17 +1,15 @@
 'use server';
 
 import prisma from '@/db';
+import { setAuthCookie } from '@/utils/auth';
 import {
 	EmailSchema,
 	PasswordSchema,
 	UsernameSchema,
 } from '@/utils/validators/user';
 import bcrypt from 'bcryptjs';
-import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
-
-const COOKIES_AUTH_EXPIRATION = 7 * 24 * 60 * 60 * 1000;
 
 const loginSchema = z.object({
 	username: UsernameSchema,
@@ -72,15 +70,10 @@ export const login = async (
 		};
 	}
 
-	cookies().set({
-		name: 'userId',
-		value: user.id,
-		httpOnly: true,
-		path: '/',
-		sameSite: 'lax',
-		secure: process.env.NODE_ENV === 'production',
-		expires: COOKIES_AUTH_EXPIRATION,
+	setAuthCookie({
+		userId: user.id,
 	});
+
 	redirect('/');
 };
 
@@ -215,14 +208,8 @@ export const register = async (
 		},
 	});
 
-	cookies().set({
-		name: 'userId',
-		value: user.id,
-		httpOnly: true,
-		path: '/',
-		sameSite: 'lax',
-		secure: process.env.NODE_ENV === 'production',
-		expires: COOKIES_AUTH_EXPIRATION,
+	setAuthCookie({
+		userId: user.id,
 	});
 	redirect('/');
 };

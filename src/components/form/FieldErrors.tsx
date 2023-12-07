@@ -6,7 +6,11 @@ const FieldErrors = ({
 	id?: string;
 }) => {
 	if (!errors?.length) return null;
-	return <span id={id}>{errors.join(' , ')}</span>;
+	return (
+		<span className='text-sm text-destructive mt-1' id={id}>
+			{errors[0]}
+		</span>
+	);
 };
 
 export default FieldErrors;

@@ -1,8 +1,14 @@
+'use client';
 import * as actions from '@/actions';
 import { Spacer } from '@/components';
 import { FromInput, SubmitButton } from '@/components/form';
+import { useFormState } from 'react-dom';
 
 const LoginPage = () => {
+	const [formState, action] = useFormState(actions.login, {
+		fieldErrors: {},
+		formError: null,
+	});
 	return (
 		<div className='flex min-h-full flex-col justify-center pb-32 pt-20'>
 			<div className='mx-auto w-full max-w-md'>
@@ -16,22 +22,33 @@ const LoginPage = () => {
 
 				<div>
 					<div className='mx-auto w-full max-w-md px-8'>
-						<form action={actions.login} className='space-y-4'>
+						<form
+							action={action}
+							autoComplete='off'
+							className='space-y-4'>
 							<FromInput
 								inputProps={{
 									name: 'username',
+									autoFocus: true,
+									className: 'lowercase',
+									placeholder: 'Username',
+									autoComplete: 'off',
 								}}
 								labelProps={{
-									children: 'Username',
+									children: 'username',
 								}}
+								errors={formState.fieldErrors.username}
 							/>
 							<FromInput
 								inputProps={{
 									name: 'password',
+									type: 'password',
+									placeholder: 'Password',
 								}}
 								labelProps={{
 									children: 'password',
 								}}
+								errors={formState.fieldErrors.password}
 							/>
 							<SubmitButton>Login</SubmitButton>
 						</form>
@@ -43,6 +60,3 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
-
-// #0f1a1c
-// #D7DAdc

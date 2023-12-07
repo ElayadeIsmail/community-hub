@@ -19,14 +19,20 @@ const FromInput = ({ inputProps, labelProps, className, errors }: Props) => {
 			<Input
 				id={id}
 				{...inputProps}
-				className='floating-input placeholder:text-transparent'
+				className={cn(
+					inputProps.className,
+					'floating-input placeholder:text-transparent'
+				)}
 				aria-invalid={errorId ? true : undefined}
 				aria-describedby={errorId}
 			/>
 			<Label
 				htmlFor={id}
 				{...labelProps}
-				className='absolute transition-all ml-2 top-4 font-semibold text-gray-500 capitalize left-3'
+				className={cn(
+					labelProps.className,
+					'absolute transition-all ml-2 top-4 font-semibold text-gray-500 capitalize left-3'
+				)}
 			/>
 			<FieldErrors errors={errors} id={errorId} />
 		</fieldset>

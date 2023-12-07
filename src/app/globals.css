@@ -89,3 +89,10 @@
 		@apply bg-background text-foreground;
 	}
 }
+
+.floating-input:is(:focus, :hover) + label,
+.floating-input:not(:placeholder-shown) + label {
+	top: 5px;
+	font-size: 12px;
+	font-weight: normal;
+}

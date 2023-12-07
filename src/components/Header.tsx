@@ -1,19 +1,20 @@
+import paths from '@/utils/paths';
 import Link from 'next/link';
 import { Button } from './ui';
 
 const Header = () => {
 	return (
 		<header className='container flex items-center justify-between h-14 border-b'>
-			<Link href={'/'} className='text-primary font-bold italic'>
+			<Link href={paths.home()} className='text-primary font-bold italic'>
 				Community Hub
 			</Link>
 			<nav className='flex space-x-3'>
-				<Link href='/login'>
-					<Button>Login</Button>
-				</Link>
-				<Link href='/register'>
-					<Button variant='secondary'>Register</Button>
-				</Link>
+				<Button asChild>
+					<Link href={paths.login()}>Login</Link>
+				</Button>
+				<Button asChild variant='secondary'>
+					<Link href={paths.register()}>Register</Link>
+				</Button>
 			</nav>
 		</header>
 	);

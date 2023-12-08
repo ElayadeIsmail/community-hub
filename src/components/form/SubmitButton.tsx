@@ -25,7 +25,8 @@ const SubmitButton = (props: ButtonProps) => {
 		<Button
 			disabled={pending}
 			className='h-12 w-full text-base'
-			type='submit'>
+			type='submit'
+			{...props}>
 			{props.children}
 			{pending && <Spinner className='ml-2' />}
 		</Button>

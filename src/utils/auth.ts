@@ -1,31 +1,42 @@
-'use server';
-import jwt from 'jsonwebtoken';
-import { cookies } from 'next/headers';
-import { Env } from './env';
+import db from '@/db';
+import { User } from '@prisma/client';
+import bcrypt from 'bcryptjs';
+import { z } from 'zod';
+import { EmailSchema, PasswordSchema } from './validators/user';
 
-const AUTH_COOKIE_NAME = 'auth';
+const loginSchema = z.object({
+	email: EmailSchema,
+	password: PasswordSchema,
+});
 
-export const setAuthCookie = ({ userId }: { userId: string }) => {
-	const signedToken = jwt.sign({ userId }, Env.COOKIE_SECRET, {
-		expiresIn: '7d',
-	});
-
-	cookies().set({
-		name: AUTH_COOKIE_NAME,
-		value: signedToken,
-		httpOnly: true,
-		secure: process.env.NODE_ENV === 'production',
-		sameSite: 'lax',
-		path: '/',
-	});
-};
-
-export const isAuthenticated = (): boolean => {
-	const token = cookies().get(AUTH_COOKIE_NAME)?.value ?? '';
+export const verifyUserCredentials = async (
+	credentials: Record<string, unknown>
+): Promise<User | null> => {
 	try {
-		jwt.verify(token, Env.COOKIE_SECRET);
-		return true;
+		const result = loginSchema.safeParse(credentials);
+		if (!result.success) return null;
+		const { email, password } = result.data;
+		const user = await db.user.findUnique({
+			where: {
+				email,
+			},
+			include: {
+				password: {
+					select: {
+						hash: true,
+					},
+				},
+			},
+		});
+		if (!user || !user.password) return null;
+		const isPasswordMatch = await bcrypt.compare(
+			password,
+			user.password.hash
+		);
+		if (!isPasswordMatch) return null;
+		const { password: storedPassword, ...userProps } = user;
+		return userProps;
 	} catch (error) {
-		return false;
+		return null;
 	}
 };

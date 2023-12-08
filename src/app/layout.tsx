@@ -1,4 +1,5 @@
 import { Header } from '@/components';
+import Providers from '@/components/Providers';
 import type { Metadata } from 'next';
 import { Nunito_Sans } from 'next/font/google';
 import './globals.css';
@@ -22,8 +23,10 @@ export default function RootLayout({
 	return (
 		<html lang='en' suppressHydrationWarning>
 			<body className={nunitoSans.className}>
-				<Header />
-				<main>{children}</main>
+				<Providers>
+					<Header />
+					<main>{children}</main>
+				</Providers>
 			</body>
 		</html>
 	);

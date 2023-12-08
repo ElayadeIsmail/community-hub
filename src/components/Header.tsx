@@ -1,6 +1,6 @@
 import paths from '@/utils/paths';
 import Link from 'next/link';
-import { Button } from './ui';
+import HeaderAuth from './HeaderAuth';
 
 const Header = () => {
 	return (
@@ -9,12 +9,7 @@ const Header = () => {
 				Community Hub
 			</Link>
 			<nav className='flex space-x-3'>
-				<Button asChild>
-					<Link href={paths.login()}>Login</Link>
-				</Button>
-				<Button asChild variant='secondary'>
-					<Link href={paths.register()}>Register</Link>
-				</Button>
+				<HeaderAuth />
 			</nav>
 		</header>
 	);

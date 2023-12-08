@@ -1,5 +1,5 @@
 import { CheckboxProps } from '@radix-ui/react-checkbox';
-import { useId, useRef } from 'react';
+import { useId } from 'react';
 import { FieldErrors } from '.';
 import { Checkbox } from '../ui';
 
@@ -15,7 +15,7 @@ function CheckboxField({
 	className?: string;
 }) {
 	const fallbackId = useId();
-	const buttonRef = useRef<HTMLButtonElement>(null);
+	// const buttonRef = useRef<HTMLButtonElement>(null);
 	// To emulate native events that Conform listen to:
 	// See https://conform.guide/integrations
 	// const control = useInputEvent({
@@ -32,7 +32,7 @@ function CheckboxField({
 			<div className='flex gap-2'>
 				<Checkbox
 					id={id}
-					ref={buttonRef}
+					// ref={buttonRef}
 					aria-invalid={errorId ? true : undefined}
 					aria-describedby={errorId}
 					{...buttonProps}

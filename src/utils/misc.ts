@@ -18,3 +18,8 @@ export function getErrorMessage(error: unknown) {
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
 }
+
+export const getInitialsFromName = (name: string): string => {
+	const sts = name.split(' ');
+	return `${sts[0][0]} ${sts[sts.length - 1][0]}`;
+};

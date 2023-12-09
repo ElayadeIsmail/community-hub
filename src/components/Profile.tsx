@@ -1,5 +1,5 @@
 'use client';
-import { getInitialsFromName } from '@/utils/misc';
+import { getInitialsFromName } from '@/lib/utils';
 import * as Avatar from '@radix-ui/react-avatar';
 import { Cross2Icon } from '@radix-ui/react-icons';
 import * as Popover from '@radix-ui/react-popover';

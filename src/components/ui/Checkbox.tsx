@@ -1,14 +1,10 @@
 'use client';
-import { cn } from '@/utils/misc';
+
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
+import { Check } from 'lucide-react';
 import * as React from 'react';
 
-export type CheckboxProps = Omit<
-	React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>,
-	'type'
-> & {
-	type?: string;
-};
+import { cn } from '@/lib/utils';
 
 const Checkbox = React.forwardRef<
 	React.ElementRef<typeof CheckboxPrimitive.Root>,
@@ -23,14 +19,7 @@ const Checkbox = React.forwardRef<
 		{...props}>
 		<CheckboxPrimitive.Indicator
 			className={cn('flex items-center justify-center text-current')}>
-			<svg viewBox='0 0 8 8'>
-				<path
-					d='M1,4 L3,6 L7,2'
-					stroke='currentcolor'
-					strokeWidth='1'
-					fill='none'
-				/>
-			</svg>
+			<Check className='h-4 w-4' />
 		</CheckboxPrimitive.Indicator>
 	</CheckboxPrimitive.Root>
 ));

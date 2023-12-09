@@ -3,8 +3,8 @@ import { PrismaAdapter } from '@auth/prisma-adapter';
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import Github from 'next-auth/providers/github';
-import { verifyUserCredentials } from './utils/auth';
-import { Env } from './utils/env';
+import { verifyUserCredentials } from './lib/auth';
+import { Env } from './lib/env';
 
 export const {
 	handlers: { GET, POST },

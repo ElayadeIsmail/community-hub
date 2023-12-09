@@ -1,4 +1,4 @@
-import paths from '@/utils/paths';
+import paths from '@/lib/paths';
 import Link from 'next/link';
 import HeaderAuth from './HeaderAuth';
 

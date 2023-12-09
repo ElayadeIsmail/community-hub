@@ -1,6 +1,6 @@
 'use client';
 import * as actions from '@/actions';
-import { FromInput, SubmitButton } from '@/components/form';
+import { FromFloatingInput, SubmitButton } from '@/components/form';
 import { useFormState } from 'react-dom';
 
 const LoginForm = () => {
@@ -21,7 +21,7 @@ const LoginForm = () => {
 						{formState.formError}
 					</span>
 				)}
-				<FromInput
+				<FromFloatingInput
 					inputProps={{
 						name: 'email',
 						autoFocus: true,
@@ -35,7 +35,7 @@ const LoginForm = () => {
 					}}
 					errors={formState.fieldErrors.email}
 				/>
-				<FromInput
+				<FromFloatingInput
 					inputProps={{
 						name: 'password',
 						type: 'password',

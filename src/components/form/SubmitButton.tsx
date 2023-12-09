@@ -1,5 +1,5 @@
 'use client';
-import { cn } from '@/utils/misc';
+import { cn } from '@/lib/utils';
 import { useFormStatus } from 'react-dom';
 import { Button, ButtonProps } from '../ui';
 
@@ -22,11 +22,7 @@ const SubmitButton = (props: ButtonProps) => {
 	const { pending } = useFormStatus();
 
 	return (
-		<Button
-			disabled={pending}
-			className='h-12 w-full text-base'
-			type='submit'
-			{...props}>
+		<Button disabled={pending} type='submit' {...props}>
 			{props.children}
 			{pending && <Spinner className='ml-2' />}
 		</Button>

@@ -72,7 +72,7 @@ model Password {
 model Community {
   id          String   @id @default(cuid())
   description String
-  name        String   @unique
+  title       String
   slug        String   @unique
   adminId     String
   admin       User     @relation(fields: [adminId], references: [id], onDelete: Cascade, onUpdate: Cascade)

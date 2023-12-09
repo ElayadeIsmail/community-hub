@@ -1,42 +1,48 @@
-import { cn } from '@/utils/misc';
+import { cn } from '@/lib/utils';
 import { useId } from 'react';
 import { FieldErrors } from '.';
-import { Input, Label } from '../ui';
+import { Input, Label, Textarea } from '../ui';
 
-interface Props {
-	labelProps: React.LabelHTMLAttributes<HTMLLabelElement>;
-	inputProps: React.InputHTMLAttributes<HTMLInputElement>;
+interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
 	errors?: Array<string>;
-	className?: string;
 }
 
-const FromInput = ({ inputProps, labelProps, className, errors }: Props) => {
+export const FromInput = ({ className, errors, ...inputProps }: Props) => {
 	const fallbackId = useId();
 	const id = inputProps.id ?? fallbackId;
 	const errorId = errors?.length ? `${id}-error` : undefined;
 	return (
-		<fieldset className={cn('relative flex flex-col', className)}>
-			<Input
-				id={id}
-				{...inputProps}
-				className={cn(
-					inputProps.className,
-					'floating-input placeholder:text-transparent'
-				)}
-				aria-invalid={errorId ? true : undefined}
-				aria-describedby={errorId}
-			/>
-			<Label
-				htmlFor={id}
-				{...labelProps}
-				className={cn(
-					labelProps.className,
-					'absolute transition-all ml-2 top-4 font-semibold text-gray-500 capitalize left-3'
-				)}
-			/>
+		<fieldset className='flex flex-col space-y-1'>
+			<Label htmlFor='email'>Email</Label>
+			<Input type='email' id='email' placeholder='Email' />
 			<FieldErrors errors={errors} id={errorId} />
 		</fieldset>
 	);
 };
 
-export default FromInput;
+interface TextAreaProps
+	extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+	errors?: Array<string>;
+}
+
+export const TextAreaInput = ({
+	className,
+	errors,
+	...props
+}: TextAreaProps) => {
+	const fallbackId = useId();
+	const id = props.id ?? fallbackId;
+	const errorId = errors?.length ? `${id}-error` : undefined;
+	return (
+		<fieldset className={cn('flex flex-col space-y-1')}>
+			<Label htmlFor='email'>Email</Label>
+			<Textarea
+				id={id}
+				{...props}
+				aria-invalid={errorId ? true : undefined}
+				aria-describedby={errorId}
+			/>
+			<FieldErrors errors={errors} id={errorId} />
+		</fieldset>
+	);
+};

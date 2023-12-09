@@ -3,11 +3,7 @@
 import * as auth from '@/auth';
 
 import prisma from '@/db';
-import {
-	EmailSchema,
-	NameSchema,
-	PasswordSchema,
-} from '@/utils/validators/user';
+import { EmailSchema, NameSchema, PasswordSchema } from '@/lib/validators/user';
 import bcrypt from 'bcryptjs';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';

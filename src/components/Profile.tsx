@@ -5,7 +5,7 @@ import { Cross2Icon } from '@radix-ui/react-icons';
 import * as Popover from '@radix-ui/react-popover';
 import { User } from 'next-auth';
 
-const Profile = ({ user }: { user: Omit<User, 'id'> }) => {
+const Profile = ({ user }: { user: User }) => {
 	return (
 		<Popover.Root>
 			<Popover.Trigger asChild>

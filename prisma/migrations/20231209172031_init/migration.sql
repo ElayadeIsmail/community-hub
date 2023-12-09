@@ -54,7 +54,7 @@ CREATE TABLE "Password" (
 CREATE TABLE "Community" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "description" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
     "adminId" TEXT NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -70,9 +70,11 @@ CREATE TABLE "Post" (
     "authorId" TEXT NOT NULL,
     "points" INTEGER NOT NULL DEFAULT 0,
     "published" BOOLEAN NOT NULL DEFAULT true,
+    "communityId" TEXT NOT NULL,
     "updatedAt" DATETIME NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT "Post_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "User" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+    CONSTRAINT "Post_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES "User" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "Post_communityId_fkey" FOREIGN KEY ("communityId") REFERENCES "Community" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -101,6 +103,14 @@ CREATE TABLE "Vote" (
     CONSTRAINT "Vote_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+-- CreateTable
+CREATE TABLE "_CommunityToUser" (
+    "A" TEXT NOT NULL,
+    "B" TEXT NOT NULL,
+    CONSTRAINT "_CommunityToUser_A_fkey" FOREIGN KEY ("A") REFERENCES "Community" ("id") ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT "_CommunityToUser_B_fkey" FOREIGN KEY ("B") REFERENCES "User" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "Account_provider_providerAccountId_key" ON "Account"("provider", "providerAccountId");
 
@@ -120,9 +130,6 @@ CREATE UNIQUE INDEX "VerificationToken_identifier_token_key" ON "VerificationTok
 CREATE UNIQUE INDEX "Password_userId_key" ON "Password"("userId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Community_name_key" ON "Community"("name");
-
--- CreateIndex
 CREATE UNIQUE INDEX "Community_slug_key" ON "Community"("slug");
 
 -- CreateIndex
@@ -133,3 +140,9 @@ CREATE UNIQUE INDEX "Vote_userId_key" ON "Vote"("userId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Vote_postId_userId_key" ON "Vote"("postId", "userId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "_CommunityToUser_AB_unique" ON "_CommunityToUser"("A", "B");
+
+-- CreateIndex
+CREATE INDEX "_CommunityToUser_B_index" ON "_CommunityToUser"("B");

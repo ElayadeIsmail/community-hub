@@ -7,7 +7,6 @@ import { Button } from './ui';
 
 const HeaderAuth = () => {
 	const session = useSession();
-	console.log({ session });
 	if (session.status === 'loading') {
 		return <></>;
 	} else if (session.data?.user) {

@@ -5,12 +5,11 @@ import { useFormState } from 'react-dom';
 import {
 	Dialog,
 	DialogContent,
-	DialogFooter,
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
 } from '../Dialog';
-import { FromInput, SubmitButton, TextAreaInput } from '../form';
+import { FormError, FromInput, SubmitButton, TextAreaInput } from '../form';
 import { Button } from '../ui';
 
 const CreateCommunityForm = () => {
@@ -29,37 +28,39 @@ const CreateCommunityForm = () => {
 				<DialogHeader>
 					<DialogTitle>Create New Community</DialogTitle>
 				</DialogHeader>
+				<FormError error={formState.formError} />
 				<form
 					id='create-community-form'
 					className='space-y-2'
 					action={dispatch}>
 					<FromInput
-						placeholder='Title'
+						placeholder='Slug'
+						label='Slug'
 						name='slug'
 						errors={formState.fieldErrors.slug}
 					/>
 					<FromInput
 						placeholder='Title'
+						label='Title'
 						name='title'
 						errors={formState.fieldErrors.title}
 					/>
 					<TextAreaInput
 						placeholder='Description'
+						label='Description'
 						name='description'
 						errors={formState.fieldErrors.description}
 					/>
+					<div className='flex items-center justify-end space-x-2'>
+						<Button
+							form='create-community-form'
+							variant='outline'
+							type='reset'>
+							Reset
+						</Button>
+						<SubmitButton type='submit'>Submit</SubmitButton>
+					</div>
 				</form>
-				<DialogFooter>
-					<Button
-						form='create-community-form'
-						variant='outline'
-						type='reset'>
-						Reset
-					</Button>
-					<SubmitButton form='create-community-form'>
-						Submit
-					</SubmitButton>
-				</DialogFooter>
 			</DialogContent>
 		</Dialog>
 	);

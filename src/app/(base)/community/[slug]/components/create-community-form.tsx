@@ -1,6 +1,6 @@
 'use client';
 import * as actions from '@/actions';
-import { PlusIcon } from '@radix-ui/react-icons';
+import { PlusIcon } from 'lucide-react';
 import { useFormState } from 'react-dom';
 import {
 	Dialog,
@@ -8,9 +8,14 @@ import {
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
-} from '../Dialog';
-import { FormError, FromInput, SubmitButton, TextAreaInput } from '../form';
-import { Button } from '../ui';
+} from '../../../../../components/dialog';
+import {
+	FormError,
+	FromInput,
+	SubmitButton,
+	TextAreaInput,
+} from '../../../../../components/form';
+import { Button } from '../../../../../components/ui';
 
 const CreateCommunityForm = () => {
 	const [formState, dispatch] = useFormState(actions.createCommunity, {
@@ -19,7 +24,7 @@ const CreateCommunityForm = () => {
 	});
 	return (
 		<Dialog>
-			<DialogTrigger>
+			<DialogTrigger asChild>
 				<Button size='icon'>
 					<PlusIcon />
 				</Button>

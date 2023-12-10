@@ -1,65 +1,20 @@
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardFooter,
-	CardHeader,
-	CardTitle,
-} from '@/components/ui/card';
-import db from '@/db';
-import { notFound } from 'next/navigation';
+import { Input } from '@/components/ui';
+import Link from 'next/link';
+import SlugCard from './components/slug-card';
 
 interface Props {
 	params: { slug: string };
 }
 
-const DisplayCommunityPage = async ({ params }: Props) => {
-	const community = await db.community.findUnique({
-		where: {
-			slug: params.slug,
-		},
-		select: {
-			title: true,
-			description: true,
-			createdAt: true,
-			_count: {
-				select: {
-					posts: true,
-					users: true,
-				},
-			},
-		},
-	});
-	if (!community) {
-		notFound();
-	}
+const DisplayCommunityPage = ({ params }: Props) => {
 	return (
 		<section className='container grid grid-cols-4 gap-4 p-4'>
 			<div className='col-span-3'>
-				<h1 className='text-xl m-2'>Posts Sections</h1>
+				<Link href={`/community/${params.slug}/posts/new`}>
+					<Input placeholder='New Post' />
+				</Link>
 			</div>
-			<Card className='sticky top-4 h-fit'>
-				<CardHeader>
-					<CardTitle>{community.title}</CardTitle>
-				</CardHeader>
-				<CardContent>
-					<CardDescription>{community.description}</CardDescription>
-				</CardContent>
-				<CardFooter className='flex items-center text-center justify-between'>
-					<span className='flex flex-col '>
-						<span>Members</span>
-						<span>10</span>
-					</span>
-					<span className='flex flex-col'>
-						<span>Posts</span>
-						<span>10</span>
-					</span>
-					<span className='flex flex-col'>
-						<span>CreatedAt</span>
-						<span>10</span>
-					</span>
-				</CardFooter>
-			</Card>
+			<SlugCard slug={params.slug} />
 		</section>
 	);
 };

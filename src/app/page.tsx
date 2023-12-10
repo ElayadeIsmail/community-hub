@@ -1,4 +1,4 @@
-import CreateCommunityForm from '@/components/communities/CreateCommunityForm';
+import PopularCommunities from '@/app/(base)/community/[slug]/components/popular-communities';
 
 export default function Home() {
 	return (
@@ -6,12 +6,7 @@ export default function Home() {
 			<div className='col-span-3 '>
 				<h1 className='text-xl m-2'>Popular posts</h1>
 			</div>
-			<div className='border shadow rounded py-3 px-4 '>
-				<div className='flex items-center justify-between'>
-					<h3 className='text-lg'>Popular Communities</h3>
-					<CreateCommunityForm />
-				</div>
-			</div>
+			<PopularCommunities />
 		</section>
 	);
 }

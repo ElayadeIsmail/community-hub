@@ -2,7 +2,7 @@
 import paths from '@/lib/paths';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
-import Profile from './Profile';
+import Profile from './profile';
 import { Button } from './ui';
 
 const HeaderAuth = () => {

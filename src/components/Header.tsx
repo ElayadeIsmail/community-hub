@@ -1,6 +1,6 @@
 import paths from '@/lib/paths';
 import Link from 'next/link';
-import HeaderAuth from './HeaderAuth';
+import HeaderAuth from './header-auth';
 
 const Header = () => {
 	return (

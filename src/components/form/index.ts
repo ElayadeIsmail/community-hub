@@ -1,5 +1,6 @@
-export { default as CheckboxField } from './CheckboxField';
-export { default as FieldErrors } from './FieldErrors';
-export { default as FormError } from './FormError';
-export { FromInput, TextAreaInput } from './Input';
-export { default as SubmitButton } from './SubmitButton';
+export { default as CheckboxField } from './checkbox-field';
+export { default as ContentField } from './content-field';
+export { default as FieldErrors } from './field-errrors';
+export { default as FormError } from './form-error';
+export { FromInput, TextAreaInput } from './input';
+export { default as SubmitButton } from './submit-button';

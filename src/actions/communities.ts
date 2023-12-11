@@ -2,6 +2,7 @@
 
 import { auth } from '@/auth';
 import db from '@/db';
+import paths from '@/lib/paths';
 import { getErrorMessage } from '@/lib/utils';
 import { Community } from '@prisma/client';
 import { redirect } from 'next/navigation';
@@ -87,5 +88,5 @@ export const createCommunity = async (
 			formError: getErrorMessage(error),
 		};
 	}
-	redirect(`/community/${community.slug}`);
+	redirect(paths.showCommunity(community.slug));
 };

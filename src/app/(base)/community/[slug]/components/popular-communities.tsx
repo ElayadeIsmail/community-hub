@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui';
 import { getPopularCommunities } from '@/db/queries/communities';
+import paths from '@/lib/paths';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 const CreateCommunityForm = dynamic(() => import('./create-community-form'), {
@@ -12,7 +13,7 @@ const PopularCommunities = async () => {
 		return (
 			<Link
 				className='font-semibold text-primary underline'
-				href={`/community/${_community.slug}`}
+				href={paths.showCommunity(_community.slug)}
 				key={_community.slug}>
 				{_community.title}
 			</Link>

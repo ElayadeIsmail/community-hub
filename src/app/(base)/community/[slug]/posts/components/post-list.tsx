@@ -1,4 +1,5 @@
 import { IPostsList } from '@/db/queries/posts';
+import paths from '@/lib/paths';
 import Link from 'next/link';
 import PostActions from './post-actions';
 
@@ -13,12 +14,17 @@ const PostList = async ({ fetcher }: Props) => {
 			<div key={_post.id} className='border rounded p-3 flex gap-3'>
 				<PostActions />
 				<div>
-					<Link href={'/community/' + _post.community.slug}>
+					<Link href={paths.showCommunity(_post.community.slug)}>
 						<span className='text-xs font-bold'>
 							c/{_post.community.slug}
 						</span>
 					</Link>
-					<Link className='' href={''}>
+					<Link
+						className={paths.showPost(
+							_post.community.slug,
+							_post.id
+						)}
+						href={''}>
 						<h3 className='text-lg font-bold line-clamp-1'>
 							{_post.title}
 						</h3>

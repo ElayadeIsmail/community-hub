@@ -2,6 +2,7 @@
 
 import { auth } from '@/auth';
 import db from '@/db';
+import paths from '@/lib/paths';
 import { Post } from '@prisma/client';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
@@ -72,5 +73,5 @@ export const createPost = async (
 			formError: 'Something Went wrong',
 		};
 	}
-	redirect(`/community/${result.data.slug}/posts/${post.id}`);
+	redirect(paths.showPost(result.data.slug, post.id));
 };

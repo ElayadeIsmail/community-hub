@@ -1,21 +1,21 @@
 'use client';
 import * as actions from '@/actions';
-import { PlusIcon } from 'lucide-react';
-import { useFormState } from 'react-dom';
-import {
-	Dialog,
-	DialogContent,
-	DialogHeader,
-	DialogTitle,
-	DialogTrigger,
-} from '../../../../../components/dialog';
 import {
 	FormError,
 	FromInput,
 	SubmitButton,
 	TextAreaInput,
-} from '../../../../../components/form';
-import { Button } from '../../../../../components/ui';
+} from '@/components/form';
+import {
+	Button,
+	Dialog,
+	DialogContent,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
+} from '@/components/ui';
+import { PlusIcon } from 'lucide-react';
+import { useFormState } from 'react-dom';
 
 const CreateCommunityForm = () => {
 	const [formState, dispatch] = useFormState(actions.createCommunity, {

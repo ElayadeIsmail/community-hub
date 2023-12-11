@@ -3,18 +3,22 @@
 import { auth } from '@/auth';
 import db from '@/db';
 
-export type IHomePopularPosts = Awaited<ReturnType<typeof getPopularPosts>>;
+export type IPostsList = Awaited<ReturnType<typeof getPopularPosts>>;
 
 export const getPopularPosts = async () => {
 	const session = await auth();
-	if (session) {
-	}
+
 	const posts = await db.post.findMany({
 		select: {
-			content: true,
+			id: true,
 			createdAt: true,
 			title: true,
 			points: true,
+			community: {
+				select: {
+					slug: true,
+				},
+			},
 			author: {
 				select: {
 					name: true,

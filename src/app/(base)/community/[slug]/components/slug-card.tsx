@@ -5,7 +5,7 @@ import {
 	CardFooter,
 	CardHeader,
 	CardTitle,
-} from '@/components/ui/card';
+} from '@/components/ui';
 import { getCommunityBySlug } from '@/db/queries/communities';
 import { formatNumber, formateDate } from '@/lib/utils';
 import { notFound } from 'next/navigation';

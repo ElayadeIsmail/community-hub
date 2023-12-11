@@ -43,3 +43,11 @@ export const formatNumber = (value: number): string => {
 export const formateDate = (d: Date) => {
 	return dayjs(d).format('MMM DD, YYYY');
 };
+
+export const delay = (ms = 2000) => {
+	return new Promise((resolve) => {
+		setTimeout(() => {
+			resolve(true);
+		}, ms);
+	});
+};

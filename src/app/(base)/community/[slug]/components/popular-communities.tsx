@@ -1,12 +1,7 @@
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui';
 import { getPopularCommunities } from '@/db/queries/communities';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import {
-	Card,
-	CardContent,
-	CardHeader,
-	CardTitle,
-} from '../../../../../components/ui/card';
 const CreateCommunityForm = dynamic(() => import('./create-community-form'), {
 	ssr: false,
 });

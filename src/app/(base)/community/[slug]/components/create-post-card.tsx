@@ -5,15 +5,10 @@ import {
 	CardDescription,
 	CardHeader,
 	CardTitle,
-} from '@/components/ui/card';
-
-const SimpleMDE = dynamic(() => import('@/components/simpleMDE'), {
-	ssr: false,
-});
+} from '@/components/ui';
 
 import * as actions from '@/actions';
 import { ContentField, FromInput, SubmitButton } from '@/components/form';
-import dynamic from 'next/dynamic';
 import { useState } from 'react';
 import { useFormState } from 'react-dom';
 

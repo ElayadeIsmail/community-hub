@@ -19,12 +19,7 @@ const PostList = async ({ fetcher }: Props) => {
 							c/{_post.community.slug}
 						</span>
 					</Link>
-					<Link
-						className={paths.showPost(
-							_post.community.slug,
-							_post.id
-						)}
-						href={''}>
+					<Link href={paths.showPost(_post.community.slug, _post.id)}>
 						<h3 className='text-lg font-bold line-clamp-1'>
 							{_post.title}
 						</h3>

@@ -1,4 +1,5 @@
 import { Spacer } from '@/components';
+import LoginForm from '../components/LoginForm';
 import { GithubProvider } from '../components/Providers';
 
 const LoginPage = () => {
@@ -13,6 +14,7 @@ const LoginPage = () => {
 				</div>
 				<Spacer size='xs' />
 				<div className='mx-auto w-full max-w-md px-8'>
+					<LoginForm />
 					<GithubProvider />
 				</div>
 			</div>

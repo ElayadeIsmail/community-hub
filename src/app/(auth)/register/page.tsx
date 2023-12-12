@@ -1,5 +1,6 @@
 import { Spacer } from '@/components';
 import { GithubProvider } from '../components/Providers';
+import RegisterFrom from '../components/RegisterFrom';
 
 const RegisterPage = () => {
 	return (
@@ -15,6 +16,7 @@ const RegisterPage = () => {
 			<Spacer size='xs' />
 
 			<div className='mx-auto w-full max-w-md px-8'>
+				<RegisterFrom />
 				<GithubProvider />
 			</div>
 		</div>

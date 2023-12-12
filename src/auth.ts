@@ -25,6 +25,9 @@ export const {
 			},
 		}),
 	],
+	pages: {
+		signIn: '/login',
+	},
 	callbacks: {
 		// Usually not needed, here we are fixing a bug in nextauth
 		async session({ session, user }: any) {
@@ -34,5 +37,8 @@ export const {
 
 			return session;
 		},
+	},
+	session: {
+		strategy: 'jwt',
 	},
 });

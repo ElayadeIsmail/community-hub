@@ -1,10 +1,3 @@
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardHeader,
-	CardTitle,
-} from '@/components/ui';
 import db from '@/db';
 import { notFound } from 'next/navigation';
 import ReactMarkDown from 'react-markdown';
@@ -23,16 +16,13 @@ const PostShow = async ({ postId }: Props) => {
 		notFound();
 	}
 	return (
-		<Card className='mt-4'>
-			<CardHeader>
-				<CardDescription>Posted By Sam</CardDescription>
-				<CardTitle>{post.title}</CardTitle>
-			</CardHeader>
+		<div className='mt-4'>
+			<h1 className='text-2xl font-bold my-2'>{post.title}</h1>
 
-			<CardContent className='prose lg:prose-xl'>
+			<div className='prose lg:prose-xl !block !w-full'>
 				<ReactMarkDown>{post.content}</ReactMarkDown>
-			</CardContent>
-		</Card>
+			</div>
+		</div>
 	);
 };
 

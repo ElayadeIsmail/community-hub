@@ -1,6 +1,7 @@
 import paths from '@/lib/paths';
 import Link from 'next/link';
 import { Suspense } from 'react';
+import { CreateCommentForm } from '../components/comments';
 import PostShow from '../components/post-show';
 
 interface Props {
@@ -13,7 +14,7 @@ interface Props {
 const ShowPostPage = ({ params: { postId, slug } }: Props) => {
 	return (
 		<section className='container grid grid-cols-4 gap-4 p-4'>
-			<div className='col-span-3 '>
+			<div className='col-span-3 space-y-3'>
 				<Link
 					className='underline decoration-solid'
 					href={paths.showCommunity(slug)}>
@@ -22,6 +23,7 @@ const ShowPostPage = ({ params: { postId, slug } }: Props) => {
 				<Suspense fallback={<>Loading...</>}>
 					<PostShow postId={postId} />
 				</Suspense>
+				<CreateCommentForm />
 			</div>
 		</section>
 	);

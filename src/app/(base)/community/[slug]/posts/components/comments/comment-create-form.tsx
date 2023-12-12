@@ -1,20 +1,60 @@
 'use client';
 
-import { SubmitButton, TextAreaInput } from '@/components/form';
+import * as actions from '@/actions';
+import { FormError, SubmitButton, TextAreaInput } from '@/components/form';
 import { Button } from '@/components/ui';
+import { useEffect, useRef, useState } from 'react';
+import { useFormState } from 'react-dom';
 
-const CreateCommentForm = () => {
+interface Props {
+	postId: string;
+	parentId?: string;
+	startOpen?: boolean;
+}
+
+const CreateCommentForm = ({ postId, startOpen, parentId }: Props) => {
+	const [open, setOpen] = useState(() => startOpen);
+	const [formState, action] = useFormState(
+		actions.createComment.bind(null, {
+			postId,
+			parentId,
+		}),
+		{
+			errors: { fieldErrors: {} },
+		}
+	);
+	const ref = useRef<HTMLFormElement>(null);
+
+	useEffect(() => {
+		if (!startOpen) {
+			setOpen(false);
+		}
+		if (formState.success) {
+			ref.current?.reset();
+		}
+	}, [formState.success, startOpen]);
+
 	return (
 		<div>
-			<Button variant='ghost' size='sm'>
+			<Button
+				variant='secondary'
+				size='sm'
+				onClick={() => setOpen((prv) => !prv)}>
 				Replay
 			</Button>
-			<form action=''>
-				<div className='space-y-2 mt-1'>
-					<TextAreaInput placeholder='Enter your comment' />
-					<SubmitButton>Submit</SubmitButton>
-				</div>
-			</form>
+			{open && (
+				<form ref={ref} action={action}>
+					<FormError error={formState.errors.formError} />
+					<div className='space-y-2 mt-1'>
+						<TextAreaInput
+							placeholder='Enter your comment'
+							name='content'
+							errors={formState.errors.fieldErrors.content}
+						/>
+						<SubmitButton>Submit</SubmitButton>
+					</div>
+				</form>
+			)}
 		</div>
 	);
 };

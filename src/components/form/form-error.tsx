@@ -1,7 +1,7 @@
 import { AlertCircle } from 'lucide-react';
 import { Alert, AlertDescription } from '../ui/alert';
 
-const FormError = ({ error }: { error: string | null }) => {
+const FormError = ({ error }: { error?: string | null }) => {
 	if (!error) return null;
 	return (
 		<Alert variant='destructive'>

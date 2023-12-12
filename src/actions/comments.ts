@@ -13,7 +13,7 @@ interface ICreateFromState {
 		fieldErrors: {
 			content?: string[];
 		};
-		formError: string | null;
+		formError?: string;
 	};
 	success?: boolean;
 }
@@ -37,7 +37,6 @@ export const createComment = async (
 		return {
 			errors: {
 				fieldErrors: result.error.flatten().fieldErrors,
-				formError: null,
 			},
 		};
 	}
@@ -76,7 +75,6 @@ export const createComment = async (
 	return {
 		errors: {
 			fieldErrors: {},
-			formError: null,
 		},
 		success: true,
 	};

@@ -23,7 +23,7 @@ const ShowPostPage = ({ params: { postId, slug } }: Props) => {
 				<Suspense fallback={<>Loading...</>}>
 					<PostShow postId={postId} />
 				</Suspense>
-				<CreateCommentForm />
+				<CreateCommentForm postId={postId} startOpen />
 			</div>
 		</section>
 	);

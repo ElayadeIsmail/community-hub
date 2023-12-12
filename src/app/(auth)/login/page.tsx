@@ -13,8 +13,9 @@ const LoginPage = () => {
 					</p>
 				</div>
 				<Spacer size='xs' />
-				<div className='mx-auto w-full max-w-md px-8'>
+				<div className='mx-auto space-y-4 w-full max-w-md px-8'>
 					<LoginForm />
+					<hr />
 					<GithubProvider />
 				</div>
 			</div>

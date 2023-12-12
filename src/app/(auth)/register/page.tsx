@@ -15,8 +15,9 @@ const RegisterPage = () => {
 			</div>
 			<Spacer size='xs' />
 
-			<div className='mx-auto w-full max-w-md px-8'>
+			<div className='mx-auto space-y-4 o w-full max-w-md px-8'>
 				<RegisterFrom />
+				<hr />
 				<GithubProvider />
 			</div>
 		</div>

@@ -3,6 +3,7 @@
 import { auth } from '@/auth';
 import db from '@/db';
 import paths from '@/lib/paths';
+import { getErrorMessage } from '@/lib/utils';
 import { Post } from '@prisma/client';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
@@ -38,6 +39,7 @@ export const createPost = async (
 	if (!session) {
 		redirect('/login');
 	}
+	console.log(session);
 	const title = formData.get('title');
 	const result = createPostSchema.safeParse({ ...props, title });
 	if (!result.success) {
@@ -70,7 +72,7 @@ export const createPost = async (
 	} catch (error) {
 		return {
 			fieldErrors: {},
-			formError: 'Something Went wrong',
+			formError: getErrorMessage(error),
 		};
 	}
 	redirect(paths.showPost(result.data.slug, post.id));

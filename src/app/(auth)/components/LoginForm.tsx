@@ -12,37 +12,33 @@ const LoginForm = () => {
 		}
 	);
 	return (
-		<div className='mx-auto w-full max-w-md px-8'>
-			<form action={action} autoComplete='off' className='space-y-4'>
-				{formState.formError && (
-					<span
-						className='text-center bg-destructive rounded py-2 inline-block w-full text-destructive-foreground'
-						role='alert'>
-						{formState.formError}
-					</span>
-				)}
-				<FromInput
-					{...{
-						name: 'email',
-						autoFocus: true,
-						className: 'lowercase',
-						placeholder: 'Email',
-						autoComplete: 'off',
-						type: 'email',
-					}}
-					errors={formState.fieldErrors.email}
-				/>
-				<FromInput
-					{...{
-						name: 'password',
-						type: 'password',
-						placeholder: 'Password',
-					}}
-					errors={formState.fieldErrors.password}
-				/>
-				<SubmitButton>Login</SubmitButton>
-			</form>
-		</div>
+		<form action={action} autoComplete='off' className='space-y-4'>
+			{formState.formError && (
+				<span
+					className='text-center bg-destructive rounded py-2 inline-block w-full text-destructive-foreground'
+					role='alert'>
+					{formState.formError}
+				</span>
+			)}
+			<FromInput
+				name='email'
+				label='Email'
+				autoFocus
+				className='lowercase'
+				placeholder='Email'
+				autoComplete='off'
+				type='email'
+				errors={formState.fieldErrors.email}
+			/>
+			<FromInput
+				label='Password'
+				name='password'
+				type='password'
+				placeholder='************'
+				errors={formState.fieldErrors.password}
+			/>
+			<SubmitButton size='full'>Login</SubmitButton>
+		</form>
 	);
 };
 

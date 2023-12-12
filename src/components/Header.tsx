@@ -1,5 +1,6 @@
 import paths from '@/lib/paths';
 import Link from 'next/link';
+import { Suspense } from 'react';
 import HeaderAuth from './header-auth';
 
 const Header = () => {
@@ -9,7 +10,9 @@ const Header = () => {
 				Community Hub
 			</Link>
 			<nav className='flex space-x-3'>
-				<HeaderAuth />
+				<Suspense fallback={<div className='h-11 w-[120px] border' />}>
+					<HeaderAuth />
+				</Suspense>
 			</nav>
 		</header>
 	);

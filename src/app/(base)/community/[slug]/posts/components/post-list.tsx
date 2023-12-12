@@ -36,7 +36,7 @@ const PostList = async ({ fetcher }: Props) => {
 			</div>
 		);
 	});
-	return <div className='flex flex-col'>{renderedPosts}</div>;
+	return <div className='flex flex-col space-y-4'>{renderedPosts}</div>;
 };
 
 export default PostList;

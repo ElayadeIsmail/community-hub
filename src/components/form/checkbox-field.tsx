@@ -41,7 +41,7 @@ function CheckboxField({
 				<label
 					htmlFor={id}
 					{...labelProps}
-					className='self-center text-body-xs text-muted-foreground'
+					className='self-center text-xs text-muted-foreground'
 				/>
 			</div>
 			<FieldErrors id={errorId} errors={errors} />

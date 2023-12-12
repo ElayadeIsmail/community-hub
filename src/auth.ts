@@ -21,6 +21,7 @@ export const {
 		CredentialsProvider({
 			async authorize(credentials) {
 				const user = await verifyUserCredentials(credentials);
+				console.log(user);
 				return user;
 			},
 		}),
@@ -30,14 +31,16 @@ export const {
 	},
 	callbacks: {
 		// Usually not needed, here we are fixing a bug in nextauth
-		async session({ session, user }: any) {
-			if (session && user) {
-				session.user.id = user.id;
+		async session({ session, user, token }) {
+			const userId = user ? user.id : token.sub ? token.sub : null;
+			if (session && userId) {
+				session.user.id = userId;
 			}
 
 			return session;
 		},
 	},
+	secret: Env.NEXTAUTH_SECRET,
 	session: {
 		strategy: 'jwt',
 	},

@@ -13,22 +13,20 @@ interface Props {
 
 const ShowPostPage = ({ params: { postId, slug } }: Props) => {
 	return (
-		<section className='container grid grid-cols-4 gap-4 p-4'>
-			<div className='col-span-3 space-y-3'>
-				<Link
-					className='underline decoration-solid'
-					href={paths.showCommunity(slug)}>
-					{'< '}Back to {slug}
-				</Link>
-				<Suspense fallback={<>Loading...</>}>
-					<PostShow postId={postId} />
-				</Suspense>
-				<CreateCommentForm postId={postId} startOpen />
-				<Suspense fallback={<>Loading...</>}>
-					<CommentList postId={postId} />
-				</Suspense>
-			</div>
-		</section>
+		<>
+			<Link
+				className='underline decoration-solid'
+				href={paths.showCommunity(slug)}>
+				{'< '}Back to {slug}
+			</Link>
+			<Suspense fallback={<>Loading...</>}>
+				<PostShow postId={postId} />
+			</Suspense>
+			<CreateCommentForm postId={postId} startOpen />
+			<Suspense fallback={<>Loading...</>}>
+				<CommentList postId={postId} />
+			</Suspense>
+		</>
 	);
 };
 

@@ -1,17 +1,21 @@
-'use client';
+import * as actions from '@/actions';
+import { auth } from '@/auth';
 import paths from '@/lib/paths';
-import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import Profile from './profile';
 import { Button } from './ui';
 
-const HeaderAuth = () => {
-	const session = useSession();
-	console.log(session);
-	if (session.status === 'loading') {
-		return <></>;
-	} else if (session.data?.user) {
-		return <Profile user={session.data?.user} />;
+const HeaderAuth = async () => {
+	const session = await auth();
+	if (session?.user) {
+		return (
+			<>
+				<Profile user={session?.user} />
+				<form action={actions.logout}>
+					<Button variant='secondary'>Logout</Button>
+				</form>
+			</>
+		);
 	} else {
 		return (
 			<>

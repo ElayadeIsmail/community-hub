@@ -8,7 +8,12 @@ import {
 } from '@/components/ui';
 
 import * as actions from '@/actions';
-import { ContentField, FromInput, SubmitButton } from '@/components/form';
+import {
+	ContentField,
+	FormError,
+	FromInput,
+	SubmitButton,
+} from '@/components/form';
 import { useState } from 'react';
 import { useFormState } from 'react-dom';
 
@@ -31,6 +36,7 @@ const CreatePostForm = ({ slug }: { slug: string }) => {
 			</CardHeader>
 			<CardContent>
 				<form action={dispatch} className='space-y-2'>
+					<FormError error={formState.formError} />
 					<FromInput
 						placeholder='Title (required)'
 						name='title'

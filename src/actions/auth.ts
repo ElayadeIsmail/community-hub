@@ -5,6 +5,7 @@ import * as auth from '@/auth';
 import prisma from '@/db';
 import { EmailSchema, NameSchema, PasswordSchema } from '@/lib/validators/user';
 import bcrypt from 'bcryptjs';
+import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
 
@@ -22,6 +23,10 @@ interface LoginFormState {
 	};
 	formError: string | null;
 }
+
+export const logout = async () => {
+	await auth.signOut({ redirectTo: '/' });
+};
 
 export const login = async (
 	provider: LoginProvider,
@@ -50,6 +55,7 @@ export const login = async (
 			formError: 'Invalid Credentials',
 		};
 	}
+	revalidatePath('/');
 	redirect('/');
 };
 

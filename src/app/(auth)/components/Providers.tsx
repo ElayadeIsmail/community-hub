@@ -8,7 +8,7 @@ export const GithubProvider = () => {
 	});
 	return (
 		<form action={action}>
-			<SubmitButton variant='outline'>
+			<SubmitButton variant='outline' size='full'>
 				<svg
 					aria-label='github'
 					className='mr-2'

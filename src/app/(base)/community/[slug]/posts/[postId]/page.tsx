@@ -1,7 +1,7 @@
 import paths from '@/lib/paths';
 import Link from 'next/link';
 import { Suspense } from 'react';
-import { CreateCommentForm } from '../components/comments';
+import { CommentList, CreateCommentForm } from '../components/comments';
 import PostShow from '../components/post-show';
 
 interface Props {
@@ -24,6 +24,9 @@ const ShowPostPage = ({ params: { postId, slug } }: Props) => {
 					<PostShow postId={postId} />
 				</Suspense>
 				<CreateCommentForm postId={postId} startOpen />
+				<Suspense fallback={<>Loading...</>}>
+					<CommentList postId={postId} />
+				</Suspense>
 			</div>
 		</section>
 	);

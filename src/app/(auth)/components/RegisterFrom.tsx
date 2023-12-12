@@ -1,10 +1,6 @@
 'use client';
 import * as actions from '@/actions';
-import {
-	CheckboxField,
-	FromFloatingInput,
-	SubmitButton,
-} from '@/components/form';
+import { CheckboxField, FromInput, SubmitButton } from '@/components/form';
 import { useFormState } from 'react-dom';
 import { GithubProvider } from './Providers';
 
@@ -23,48 +19,36 @@ const RegisterFrom = () => {
 						{formState.formError}
 					</span>
 				)}
-				<FromFloatingInput
-					inputProps={{
+				<FromInput
+					{...{
 						name: 'name',
 						autoFocus: true,
 						placeholder: 'Name',
 					}}
-					labelProps={{
-						children: 'name',
-					}}
 					errors={formState.fieldErrors.name}
 				/>
-				<FromFloatingInput
-					inputProps={{
+				<FromInput
+					{...{
 						name: 'email',
 						className: 'lowercase',
 						placeholder: 'email',
 						autoComplete: 'off',
 					}}
-					labelProps={{
-						children: 'email',
-					}}
 					errors={formState.fieldErrors.email}
 				/>
-				<FromFloatingInput
-					inputProps={{
+				<FromInput
+					{...{
 						name: 'password',
 						type: 'password',
 						placeholder: 'Password',
 					}}
-					labelProps={{
-						children: 'password',
-					}}
 					errors={formState.fieldErrors.password}
 				/>
-				<FromFloatingInput
-					inputProps={{
+				<FromInput
+					{...{
 						name: 'confirmPassword',
 						type: 'password',
 						placeholder: 'confirm Password',
-					}}
-					labelProps={{
-						children: 'Confirm Password',
 					}}
 					errors={formState.fieldErrors.confirmPassword}
 				/>

@@ -1,4 +1,5 @@
 import { fetchCommentsByPostId } from '@/db/queries/comments';
+import CommentShow from './comment-show';
 
 interface Props {
 	postId: string;
@@ -12,7 +13,13 @@ const CommentList = async ({ postId }: Props) => {
 	);
 
 	const renderedComments = topLevelComments.map((_comment) => {
-		return <p key={_comment.id}>{_comment.content}</p>;
+		return (
+			<CommentShow
+				commentId={_comment.id}
+				postId={postId}
+				key={_comment.id}
+			/>
+		);
 	});
 
 	return (

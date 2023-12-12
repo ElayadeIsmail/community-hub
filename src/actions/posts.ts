@@ -39,7 +39,6 @@ export const createPost = async (
 	if (!session) {
 		redirect('/login');
 	}
-	console.log(session);
 	const title = formData.get('title');
 	const result = createPostSchema.safeParse({ ...props, title });
 	if (!result.success) {
@@ -76,4 +75,175 @@ export const createPost = async (
 		};
 	}
 	redirect(paths.showPost(result.data.slug, post.id));
+};
+
+const voteSchema = z.object({
+	postId: z.string(),
+	vote: z.number().int().min(-1).max(1),
+});
+
+type VoteSchema = z.infer<typeof voteSchema>;
+
+export const vote = async (body: VoteSchema) => {
+	const session = await auth();
+	if (!session) {
+		redirect('/login');
+	}
+
+	const result = voteSchema.safeParse(body);
+	if (!result.success) {
+		return { status: 'error', message: 'invalid body' } as const;
+	}
+	const existingVote = await db.vote.findUnique({
+		where: {
+			postId_userId: {
+				postId: result.data.postId,
+				userId: session.user.id,
+			},
+		},
+	});
+
+	if (!existingVote) {
+		if (result.data.vote === 0) {
+			return { status: 'error', message: 'invalid vote' } as const;
+		}
+		// create a new vote
+		const post = await db.post.update({
+			where: {
+				id: result.data.postId,
+			},
+			select: {
+				points: true,
+			},
+			data: {
+				points: {
+					increment: result.data.vote,
+				},
+				votes: {
+					create: {
+						userId: session.user.id,
+						value: result.data.vote,
+					},
+				},
+			},
+		});
+
+		return {
+			status: 'success',
+			data: { points: post.points, vote: result.data.vote },
+		} as const;
+	}
+	if (result.data.vote === 1) {
+		if (existingVote.value === 1) {
+			return { status: 'error', message: 'invalid vote' } as const;
+		} else {
+			const post = await db.post.update({
+				where: {
+					id: result.data.postId,
+				},
+				data: {
+					points: {
+						increment: 2,
+					},
+					votes: {
+						update: {
+							where: {
+								postId_userId: {
+									postId: result.data.postId,
+									userId: session.user.id,
+								},
+							},
+							data: {
+								value: 1,
+							},
+						},
+					},
+				},
+			});
+			return {
+				status: 'success',
+				data: { points: post.points, vote: result.data.vote },
+			} as const;
+		}
+	} else if (result.data.vote === 0) {
+		if (existingVote.value === 1) {
+			const post = await db.post.update({
+				where: {
+					id: result.data.postId,
+				},
+				data: {
+					points: {
+						decrement: 1,
+					},
+					votes: {
+						delete: {
+							postId_userId: {
+								postId: result.data.postId,
+								userId: session.user.id,
+							},
+						},
+					},
+				},
+			});
+			return {
+				status: 'success',
+				data: { points: post.points, vote: result.data.vote },
+			} as const;
+		} else {
+			const post = await db.post.update({
+				where: {
+					id: result.data.postId,
+				},
+				data: {
+					points: {
+						increment: 1,
+					},
+					votes: {
+						delete: {
+							postId_userId: {
+								postId: result.data.postId,
+								userId: session.user.id,
+							},
+						},
+					},
+				},
+			});
+			return {
+				status: 'success',
+				data: { points: post.points, vote: result.data.vote },
+			} as const;
+		}
+	} else {
+		if (existingVote.value === 1) {
+			const post = await db.post.update({
+				where: {
+					id: result.data.postId,
+				},
+				data: {
+					points: {
+						decrement: 2,
+					},
+					votes: {
+						update: {
+							where: {
+								postId_userId: {
+									postId: result.data.postId,
+									userId: session.user.id,
+								},
+							},
+							data: {
+								value: -1,
+							},
+						},
+					},
+				},
+			});
+			return {
+				status: 'success',
+				data: { points: post.points, vote: result.data.vote },
+			} as const;
+		} else {
+			return { status: 'error', message: 'invalid vote' } as const;
+		}
+	}
 };

@@ -12,7 +12,11 @@ const PostList = async ({ fetcher }: Props) => {
 	const renderedPosts = posts.map((_post) => {
 		return (
 			<div key={_post.id} className='border rounded p-3 flex gap-3'>
-				<PostActions />
+				<PostActions
+					points={_post.points}
+					postId={_post.id}
+					currentVote={_post.votes[0]}
+				/>
 				<div>
 					<Link href={paths.showCommunity(_post.community.slug)}>
 						<span className='text-xs font-bold'>

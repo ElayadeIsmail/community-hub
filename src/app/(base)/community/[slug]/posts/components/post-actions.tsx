@@ -1,21 +1,60 @@
 'use client';
+import * as actions from '@/actions';
+import { cn, formatNumber } from '@/lib/utils';
+import { Vote } from '@prisma/client';
 import { ArrowBigDown, ArrowBigUp } from 'lucide-react';
+import { useState } from 'react';
 
-const PostActions = () => {
+interface Props {
+	points: number;
+	postId: string;
+	currentVote?: Vote;
+}
+
+const PostActions = ({ points, postId, currentVote }: Props) => {
+	const [currentPoints, setCurrentPoints] = useState(() => points);
+	const [userVote, setUserVote] = useState<number>(() => {
+		if (currentVote) return currentVote.value;
+		return 0;
+	});
 	return (
 		<div className='flex flex-col items-center'>
 			<button
-				onClick={(e) => {
-					e.stopPropagation();
+				onClick={async () => {
+					const result = await actions.vote({
+						postId,
+						vote: userVote === 1 ? 0 : 1,
+					});
+					if (result.status === 'success') {
+						setUserVote(result.data.vote);
+						setCurrentPoints(result.data.points);
+					}
 				}}>
-				<ArrowBigUp />
+				<ArrowBigUp
+					className={cn({
+						'fill-primary text-primary': userVote === 1,
+					})}
+				/>
 			</button>
-			<span>0</span>
+			<span className='font-bold text-xs'>
+				{formatNumber(currentPoints)}
+			</span>
 			<button
-				onClick={(e) => {
-					e.stopPropagation();
+				onClick={async () => {
+					const result = await actions.vote({
+						postId,
+						vote: userVote === -1 ? 0 : -1,
+					});
+					if (result.status === 'success') {
+						setUserVote(result.data.vote);
+						setCurrentPoints(result.data.points);
+					}
 				}}>
-				<ArrowBigDown />
+				<ArrowBigDown
+					className={cn({
+						'fill-indigo-800 text-indigo-800': userVote === -1,
+					})}
+				/>
 			</button>
 		</div>
 	);

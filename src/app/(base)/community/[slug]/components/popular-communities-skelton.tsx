@@ -17,7 +17,7 @@ const PopularCommunitiesSkelton = () => {
 			<CardHeader>
 				<CardTitle className='flex items-center justify-between text-xl'>
 					Popular Communities
-					<Button size='icon'>
+					<Button size='icon' aria-label='create community'>
 						<PlusIcon />
 					</Button>
 				</CardTitle>

@@ -29,7 +29,8 @@ const PostActions = ({ points, postId, currentVote }: Props) => {
 						setUserVote(result.data.vote);
 						setCurrentPoints(result.data.points);
 					}
-				}}>
+				}}
+				aria-label='up-vote'>
 				<ArrowBigUp
 					className={cn({
 						'fill-primary text-primary': userVote === 1,
@@ -49,7 +50,8 @@ const PostActions = ({ points, postId, currentVote }: Props) => {
 						setUserVote(result.data.vote);
 						setCurrentPoints(result.data.points);
 					}
-				}}>
+				}}
+				aria-label='down-vote'>
 				<ArrowBigDown
 					className={cn({
 						'fill-indigo-800 text-indigo-800': userVote === -1,

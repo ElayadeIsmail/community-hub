@@ -22,9 +22,9 @@ const PostCard = ({ post }: Props) => {
 					</span>
 				</Link>
 				<Link href={paths.showPost(post.community.slug, post.id)}>
-					<h3 className='text-lg font-bold line-clamp-1'>
+					<h2 className='text-lg font-bold line-clamp-1'>
 						{post.title}
-					</h3>
+					</h2>
 				</Link>
 				<div className='flex flex-row gap-8'>
 					<p className='text-xs text-gray-400'>

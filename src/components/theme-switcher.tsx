@@ -12,6 +12,7 @@ const ThemeSwitcher = () => {
 				const newTheme = theme === 'light' ? 'dark' : 'light';
 				setTheme(newTheme);
 			}}
+			aria-label='theme-switcher'
 			variant='ghost'>
 			{Icon}
 		</Button>

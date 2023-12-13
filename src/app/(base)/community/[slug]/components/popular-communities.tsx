@@ -11,12 +11,13 @@ const PopularCommunities = async () => {
 	const communities = await getPopularCommunities();
 	const renderedCommunities = communities.map((_community) => {
 		return (
-			<Link
-				className='font-semibold text-primary underline'
-				href={paths.showCommunity(_community.slug)}
-				key={_community.slug}>
-				{_community.title}
-			</Link>
+			<li key={_community.slug}>
+				<Link
+					className='font-semibold text-primary underline'
+					href={paths.showCommunity(_community.slug)}>
+					{_community.title}
+				</Link>
+			</li>
 		);
 	});
 	return (

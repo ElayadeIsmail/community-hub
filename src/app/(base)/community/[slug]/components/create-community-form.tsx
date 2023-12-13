@@ -25,7 +25,7 @@ const CreateCommunityForm = () => {
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
-				<Button size='icon'>
+				<Button size='icon' aria-label='create community'>
 					<PlusIcon />
 				</Button>
 			</DialogTrigger>

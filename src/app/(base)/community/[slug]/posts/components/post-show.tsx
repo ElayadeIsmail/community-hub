@@ -21,7 +21,7 @@ const PostShow = async ({ postId }: Props) => {
 				{post.title}
 			</h1>
 
-			<div className='prose max-w-full'>
+			<div className='prose max-w-full text-foreground'>
 				<ReactMarkDown>{post.content}</ReactMarkDown>
 			</div>
 		</div>

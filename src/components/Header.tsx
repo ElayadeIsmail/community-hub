@@ -2,6 +2,7 @@ import paths from '@/lib/paths';
 import Link from 'next/link';
 import { Suspense } from 'react';
 import HeaderAuth from './header-auth';
+import ThemeSwitcher from './theme-switcher';
 
 const Header = () => {
 	return (
@@ -13,6 +14,7 @@ const Header = () => {
 				<Suspense fallback={<div className='h-11 w-[120px] border' />}>
 					<HeaderAuth />
 				</Suspense>
+				<ThemeSwitcher />
 			</nav>
 		</header>
 	);

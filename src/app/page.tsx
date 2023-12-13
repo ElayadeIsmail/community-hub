@@ -1,6 +1,7 @@
 import PopularCommunities from '@/app/(base)/community/[slug]/components/popular-communities';
 import { getPopularPosts } from '@/db/queries/posts';
 import { Suspense } from 'react';
+import PopularCommunitiesSkelton from './(base)/community/[slug]/components/popular-communities-skelton';
 import { PostListSkeleton } from './(base)/community/[slug]/posts/components';
 import PostList from './(base)/community/[slug]/posts/components/post-list';
 
@@ -13,7 +14,7 @@ export default function Home() {
 					<PostList fetcher={getPopularPosts} />
 				</Suspense>
 			</div>
-			<Suspense>
+			<Suspense fallback={<PopularCommunitiesSkelton />}>
 				<PopularCommunities />
 			</Suspense>
 		</section>

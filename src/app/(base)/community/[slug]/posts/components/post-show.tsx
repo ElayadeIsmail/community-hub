@@ -1,4 +1,5 @@
 import db from '@/db';
+import { delay } from '@/lib/utils';
 import { notFound } from 'next/navigation';
 import ReactMarkDown from 'react-markdown';
 
@@ -7,6 +8,7 @@ interface Props {
 }
 
 const PostShow = async ({ postId }: Props) => {
+	await delay();
 	const post = await db.post.findUnique({
 		where: {
 			id: postId,

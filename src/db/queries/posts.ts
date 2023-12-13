@@ -5,7 +5,7 @@ import db from '@/db';
 
 export type IPostsList = Awaited<ReturnType<typeof getPopularPosts>>;
 
-export const getPopularPosts = async () => {
+export const getPopularPosts = async (cursor?: string) => {
 	const session = await auth();
 
 	const posts = await db.post.findMany({
@@ -42,9 +42,7 @@ export const getPopularPosts = async () => {
 				: undefined,
 		},
 		orderBy: {
-			comments: {
-				_count: 'desc',
-			},
+			points: 'desc',
 		},
 	});
 	return posts;

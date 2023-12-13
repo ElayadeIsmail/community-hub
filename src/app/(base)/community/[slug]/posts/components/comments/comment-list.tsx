@@ -1,5 +1,4 @@
 import { fetchCommentsByPostId } from '@/db/queries/comments';
-import { delay } from '@/lib/utils';
 import CommentShow from './comment-show';
 
 interface Props {
@@ -7,7 +6,6 @@ interface Props {
 }
 
 const CommentList = async ({ postId }: Props) => {
-	await delay();
 	const comments = await fetchCommentsByPostId(postId);
 
 	const topLevelComments = comments.filter(

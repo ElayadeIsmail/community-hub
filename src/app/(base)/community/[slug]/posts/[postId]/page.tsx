@@ -1,3 +1,4 @@
+import db from '@/db';
 import paths from '@/lib/paths';
 import Link from 'next/link';
 import { Suspense } from 'react';
@@ -8,6 +9,22 @@ import {
 	CreateCommentForm,
 } from '../components/comments';
 import PostShow from '../components/post-show';
+
+import type { Metadata } from 'next';
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+	// read route params
+	const post = await db.post.findUnique({
+		where: {
+			id: params.postId,
+		},
+	});
+
+	return {
+		title: post?.title,
+		description: `post about ${post?.title}`,
+	};
+}
 
 interface Props {
 	params: {

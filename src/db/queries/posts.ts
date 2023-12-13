@@ -2,12 +2,10 @@
 
 import { auth } from '@/auth';
 import db from '@/db';
-import { delay } from '@/lib/utils';
 
 export type IPostsList = Awaited<ReturnType<typeof getPopularPosts>>;
 
 export const getPopularPosts = async (cursor?: string) => {
-	await delay();
 	const session = await auth();
 
 	const posts = await db.post.findMany({
@@ -53,7 +51,6 @@ export const getPopularPosts = async (cursor?: string) => {
 	return posts;
 };
 export const getPostsBySlug = async (slug: string, cursor?: string) => {
-	await delay();
 	const session = await auth();
 
 	const posts = await db.post.findMany({

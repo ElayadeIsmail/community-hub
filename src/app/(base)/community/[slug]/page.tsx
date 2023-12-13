@@ -2,6 +2,7 @@ import { Input } from '@/components/ui';
 import { getPostsBySlug } from '@/db/queries/posts';
 import paths from '@/lib/paths';
 import Link from 'next/link';
+import { Suspense } from 'react';
 import PostList from './posts/components/post-list';
 
 interface Props {
@@ -14,7 +15,14 @@ const DisplayCommunityPage = ({ params: { slug } }: Props) => {
 			<Link href={paths.newPost(slug)}>
 				<Input placeholder='New Post' />
 			</Link>
-			<PostList fetcher={() => getPostsBySlug(slug)} />
+			<Suspense fallback={<span>Loading...</span>}>
+				<PostList
+					fetcher={async (curser?: string) => {
+						'use server';
+						return getPostsBySlug(slug, curser);
+					}}
+				/>
+			</Suspense>
 		</>
 	);
 };

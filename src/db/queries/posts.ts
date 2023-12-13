@@ -41,13 +41,16 @@ export const getPopularPosts = async (cursor?: string) => {
 				  }
 				: undefined,
 		},
+		cursor: typeof cursor === 'string' ? { id: cursor } : undefined,
+		skip: typeof cursor === 'string' ? 1 : 0,
+		take: 20,
 		orderBy: {
 			points: 'desc',
 		},
 	});
 	return posts;
 };
-export const getPostsBySlug = async (slug: string) => {
+export const getPostsBySlug = async (slug: string, cursor?: string) => {
 	const session = await auth();
 
 	const posts = await db.post.findMany({
@@ -88,10 +91,11 @@ export const getPostsBySlug = async (slug: string) => {
 				  }
 				: undefined,
 		},
+		cursor: typeof cursor === 'string' ? { id: cursor } : undefined,
+		skip: typeof cursor === 'string' ? 1 : 0,
+		take: 20,
 		orderBy: {
-			comments: {
-				_count: 'desc',
-			},
+			points: 'desc',
 		},
 	});
 	return posts;

@@ -1,4 +1,5 @@
 import { fetchCommentsByPostId } from '@/db/queries/comments';
+import { AvatarPlaceholder } from '@/lib/constants';
 import Image from 'next/image';
 import CommentCreateForm from './comment-create-form';
 
@@ -32,17 +33,17 @@ const CommentShow = async ({ postId, commentId }: Props) => {
 		<div className='p-4 border mt-2 mb-1'>
 			<div className='flex gap-3'>
 				<Image
-					src={comment.user.image || ''}
+					src={comment.user.image || AvatarPlaceholder}
 					alt='user image'
 					width={40}
 					height={40}
 					className='w-10 h-10 rounded-full'
 				/>
 				<div className='flex-1 space-y-3'>
-					<p className='text-sm font-medium text-gray-500'>
+					<p className='text-sm font-medium text-muted-foreground'>
 						{comment.user.name}
 					</p>
-					<p className='text-gray-900'>{comment.content}</p>
+					<p className='text-accent-foreground'>{comment.content}</p>
 
 					<CommentCreateForm
 						postId={comment.postId}

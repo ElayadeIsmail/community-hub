@@ -13,7 +13,7 @@ const PostCard = ({ post }: Props) => {
 			<PostActions
 				points={post.points}
 				postId={post.id}
-				currentVote={post.votes[0]}
+				currentVote={post.votes?.[0]}
 			/>
 			<div>
 				<Link href={paths.showCommunity(post.community.slug)}>

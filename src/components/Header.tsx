@@ -1,8 +1,9 @@
 import paths from '@/lib/paths';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { Suspense } from 'react';
 import HeaderAuth from './header-auth';
-import ThemeSwitcher from './theme-switcher';
+const ThemeSwitcher = dynamic(() => import('./theme-switcher'), { ssr: false });
 
 const Header = () => {
 	return (

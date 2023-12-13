@@ -25,7 +25,7 @@ const PostActions = ({ points, postId, currentVote }: Props) => {
 						postId,
 						vote: userVote === 1 ? 0 : 1,
 					});
-					if (result.status === 'success') {
+					if (result?.status === 'success') {
 						setUserVote(result.data.vote);
 						setCurrentPoints(result.data.points);
 					}
@@ -45,7 +45,7 @@ const PostActions = ({ points, postId, currentVote }: Props) => {
 						postId,
 						vote: userVote === -1 ? 0 : -1,
 					});
-					if (result.status === 'success') {
+					if (result?.status === 'success') {
 						setUserVote(result.data.vote);
 						setCurrentPoints(result.data.points);
 					}

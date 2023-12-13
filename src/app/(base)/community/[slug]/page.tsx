@@ -3,6 +3,7 @@ import { getPostsBySlug } from '@/db/queries/posts';
 import paths from '@/lib/paths';
 import Link from 'next/link';
 import { Suspense } from 'react';
+import { PostListSkeleton } from './posts/components';
 import PostList from './posts/components/post-list';
 
 interface Props {
@@ -15,7 +16,7 @@ const DisplayCommunityPage = ({ params: { slug } }: Props) => {
 			<Link href={paths.newPost(slug)}>
 				<Input placeholder='New Post' />
 			</Link>
-			<Suspense fallback={<span>Loading...</span>}>
+			<Suspense fallback={<PostListSkeleton />}>
 				<PostList
 					fetcher={async (curser?: string) => {
 						'use server';

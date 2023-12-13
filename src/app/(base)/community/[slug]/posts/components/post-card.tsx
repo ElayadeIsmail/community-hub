@@ -27,10 +27,10 @@ const PostCard = ({ post }: Props) => {
 					</h2>
 				</Link>
 				<div className='flex flex-row gap-8'>
-					<p className='text-xs text-gray-400'>
+					<p className='text-xs text-accent-foreground/80'>
 						By {post.author.name}
 					</p>
-					<p className='text-xs text-gray-400'>
+					<p className='text-xs text-accent-foreground/80'>
 						{post._count.comments} comments
 					</p>
 				</div>

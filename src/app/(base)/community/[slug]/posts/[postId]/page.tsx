@@ -1,7 +1,12 @@
 import paths from '@/lib/paths';
 import Link from 'next/link';
 import { Suspense } from 'react';
-import { CommentList, CreateCommentForm } from '../components/comments';
+import { PostShowSkelton } from '../components';
+import {
+	CommentList,
+	CommentListSkelton,
+	CreateCommentForm,
+} from '../components/comments';
 import PostShow from '../components/post-show';
 
 interface Props {
@@ -19,11 +24,11 @@ const ShowPostPage = ({ params: { postId, slug } }: Props) => {
 				href={paths.showCommunity(slug)}>
 				{'< '}Back to {slug}
 			</Link>
-			<Suspense fallback={<>Loading...</>}>
+			<Suspense fallback={<PostShowSkelton />}>
 				<PostShow postId={postId} />
 			</Suspense>
 			<CreateCommentForm postId={postId} startOpen />
-			<Suspense fallback={<>Loading...</>}>
+			<Suspense fallback={<CommentListSkelton />}>
 				<CommentList postId={postId} />
 			</Suspense>
 		</>

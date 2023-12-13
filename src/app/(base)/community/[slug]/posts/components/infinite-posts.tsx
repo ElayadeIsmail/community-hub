@@ -1,4 +1,5 @@
 'use client';
+import { Spinner } from '@/components/ui';
 import { IPostsList } from '@/db/queries/posts';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import { useEffect, useRef, useState } from 'react';
@@ -42,7 +43,7 @@ const InfinitePosts = ({ fetcher, initialPosts }: Props) => {
 		<div className='flex flex-col space-y-3'>
 			{renderedPosts}
 			<div className='h-1' ref={ref} />
-			{isLoading && <span>Loading...</span>}
+			{isLoading && <Spinner />}
 		</div>
 	);
 };

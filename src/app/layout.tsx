@@ -1,5 +1,5 @@
 import { Header } from '@/components';
-import Providers from '@/components/Providers';
+import Providers from '@/components/providers';
 import type { Metadata } from 'next';
 import { Nunito_Sans } from 'next/font/google';
 import './globals.css';

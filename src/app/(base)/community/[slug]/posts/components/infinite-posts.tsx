@@ -39,11 +39,20 @@ const InfinitePosts = ({ fetcher, initialPosts }: Props) => {
 	const renderedPosts = posts.map((_post) => {
 		return <PostCard post={_post} key={_post.id} />;
 	});
+
+	const hasNoResult = posts.length === 0 && !isLoading;
+
 	return (
 		<div className='flex flex-col space-y-3'>
-			{renderedPosts}
-			<div className='h-1' ref={ref} />
-			{isLoading && <Spinner />}
+			{!hasNoResult ? (
+				<>
+					{renderedPosts}
+					<div className='h-1' ref={ref} />
+					{isLoading && <Spinner />}
+				</>
+			) : (
+				<h2>Hm... we couldn’t find any posts</h2>
+			)}
 		</div>
 	);
 };

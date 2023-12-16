@@ -1,8 +1,14 @@
+import { auth } from '@/auth';
 import { Spacer } from '@/components';
+import { redirect } from 'next/navigation';
 import { GithubProvider } from '../components/Providers';
 import RegisterFrom from '../components/RegisterFrom';
 
-const RegisterPage = () => {
+const RegisterPage = async () => {
+	const session = await auth();
+	if (session) {
+		redirect('/');
+	}
 	return (
 		<div className='flex min-h-full flex-col justify-center pb-32 pt-20'>
 			<div className='text-center'>

@@ -1,3 +1,4 @@
+import { auth } from '@/auth';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui';
 import { getPopularCommunities } from '@/db/queries/communities';
 import paths from '@/lib/paths';
@@ -8,7 +9,10 @@ const CreateCommunityForm = dynamic(() => import('./create-community-form'), {
 });
 
 const PopularCommunities = async () => {
-	const communities = await getPopularCommunities();
+	const [communities, session] = await Promise.all([
+		getPopularCommunities(),
+		auth(),
+	]);
 	const renderedCommunities = communities.map((_community) => {
 		return (
 			<li key={_community.slug}>
@@ -20,12 +24,13 @@ const PopularCommunities = async () => {
 			</li>
 		);
 	});
+	const isLoggedIn = Boolean(session);
 	return (
 		<Card className='sticky top-4 h-fit'>
 			<CardHeader>
 				<CardTitle className='flex items-center justify-between text-xl'>
 					Popular Communities
-					<CreateCommunityForm />
+					{isLoggedIn && <CreateCommunityForm />}
 				</CardTitle>
 			</CardHeader>
 			<CardContent>

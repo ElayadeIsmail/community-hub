@@ -21,7 +21,6 @@ export const {
 		CredentialsProvider({
 			async authorize(credentials) {
 				const user = await verifyUserCredentials(credentials);
-				console.log(user);
 				return user;
 			},
 		}),

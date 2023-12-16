@@ -1,8 +1,14 @@
+import { auth } from '@/auth';
 import { Spacer } from '@/components';
+import { redirect } from 'next/navigation';
 import LoginForm from '../components/LoginForm';
 import { GithubProvider } from '../components/Providers';
 
-const LoginPage = () => {
+const LoginPage = async () => {
+	const session = await auth();
+	if (session) {
+		redirect('/');
+	}
 	return (
 		<div className='flex min-h-full flex-col justify-center pb-32 pt-20'>
 			<div className='mx-auto w-full max-w-md'>

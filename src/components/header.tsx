@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { Suspense } from 'react';
 import HeaderAuth from './header-auth';
+import SearchInput from './search-input';
 const ThemeSwitcher = dynamic(() => import('./theme-switcher'), { ssr: false });
 
 const Header = () => {
@@ -11,6 +12,9 @@ const Header = () => {
 			<Link href={paths.home()} className='text-primary font-bold italic'>
 				Community Hub
 			</Link>
+			<Suspense>
+				<SearchInput />
+			</Suspense>
 			<nav className='flex space-x-3'>
 				<Suspense fallback={<div className='h-11 w-[120px] border' />}>
 					<HeaderAuth />

@@ -108,15 +108,16 @@ export const getSearchPosts = async (searchTerm: string, cursor?: string) => {
 			OR: [
 				{
 					community: {
-						slug: { contains: searchTerm },
+						slug: { contains: searchTerm, mode: 'insensitive' },
 					},
 				},
 				{
-					title: { contains: searchTerm },
+					title: { contains: searchTerm, mode: 'insensitive' },
 				},
 				{
 					content: {
 						contains: searchTerm,
+						mode: 'insensitive',
 					},
 				},
 			],

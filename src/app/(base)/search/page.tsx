@@ -18,8 +18,8 @@ const SearchPage = ({ searchParams }: SearchPageProps) => {
 	}
 	return (
 		<section className='container grid grid-cols-4 gap-4 p-4'>
-			<div className='col-span-3 '>
-				<h1 className='text-4xl font-bold my-4'>
+			<div className='lg:col-span-3 col-span-4'>
+				<h1 className='lg:text-4xl text-lg font-bold my-4'>
 					Search Result For &quot;{searchParams.term}&quot;
 				</h1>
 				<Suspense fallback={<PostListSkeleton />}>

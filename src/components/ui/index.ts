@@ -6,6 +6,7 @@ export * from './checkbox';
 export * from './dialog';
 export * from './input';
 export * from './label';
+export * from './sheet';
 export * from './skeleton';
 export * from './spinner';
 export * from './textarea';

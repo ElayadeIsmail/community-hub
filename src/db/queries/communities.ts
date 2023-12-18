@@ -29,6 +29,6 @@ export const getPopularCommunities = async () => {
 				_count: 'desc',
 			},
 		},
-		take: 10,
+		take: 30,
 	});
 };

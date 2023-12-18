@@ -34,7 +34,7 @@ const PopularCommunities = async () => {
 				</CardTitle>
 			</CardHeader>
 			<CardContent>
-				<ul className='flex flex-col space-y-2'>
+				<ul className='flex flex-col space-y-2 max-h-96 overflow-y-scroll'>
 					{renderedCommunities}
 				</ul>
 			</CardContent>

@@ -9,7 +9,6 @@ const SearchInput = () => {
 		<form action={actions.search}>
 			<Input
 				placeholder='Search'
-				className='w-[300px]'
 				name='term'
 				defaultValue={searchParams.get('term') || ''}
 			/>

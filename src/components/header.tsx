@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { Suspense } from 'react';
 import HeaderAuth from './header-auth';
 import SearchInput from './search-input';
-import SearchMobile from './search-mobile';
 const ThemeSwitcher = dynamic(() => import('./theme-switcher'), { ssr: false });
 
 const Header = () => {
@@ -25,7 +24,6 @@ const Header = () => {
 				<Suspense fallback={<div className='h-11 w-[120px] border' />}>
 					<HeaderAuth />
 				</Suspense>
-				<SearchMobile />
 				<ThemeSwitcher />
 			</nav>
 		</header>

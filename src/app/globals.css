@@ -46,6 +46,12 @@
 		--border: 12 6.5% 15.1%;
 		--input: 12 6.5% 15.1%;
 		--ring: 16 100% 50%;
+
+		.CodeMirror,
+		.CodeMirror-scroll {
+			background-color: black;
+			color: #fff;
+		}
 	}
 }
 

@@ -10,7 +10,7 @@ const Profile = ({ user }: { user: User }) => {
 		<Popover.Root>
 			<Popover.Trigger className='flex mr-2 items-center min-w-[140px] justify-between border rounded px-2 py-1'>
 				<p className='flex items-center'>
-					<Avatar.Root className='w-8 h-8 rounded-full'>
+					<Avatar.Root className='w-8 h-8 rounded-full mr-2'>
 						<Image
 							className={'w-8 h-8 rounded-full'}
 							src={user.image || AvatarPlaceholder}

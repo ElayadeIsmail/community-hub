@@ -14,7 +14,7 @@ const Header = () => {
 				<span className='lg:hidden inline-block'>C-H</span>
 			</Link>
 
-			<div className='hidden lg:block'>
+			<div className='hidden lg:block w-72'>
 				<Suspense>
 					<SearchInput />
 				</Suspense>
